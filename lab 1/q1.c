@@ -19,6 +19,7 @@ void  find_smallest_and_largest(int arr[], int n, int *smallest, int *largest)
             *smallest = arr[i];
         if (arr[i] > *largest)
             *largest = arr[i];
+            
     }
 
 }

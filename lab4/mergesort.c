@@ -13,12 +13,11 @@ void printArray(int *A, int n)
 
 void merge(int *A, int mid, int low, int high)
 {
-    int i, j, k, B[100000];
-    i = low;
+    int i, j, k;
+    i = j = low;
     j = mid + 1;
-    k = low;
-
-    while (i <= mid && j <= high)
+    int B[100000];
+    while (i < mid && j < high)
     {
         if (A[i] < A[j])
         {
@@ -33,33 +32,29 @@ void merge(int *A, int mid, int low, int high)
             k++;
         }
     }
-    while (i <= mid)
+    while (i < mid)
     {
         B[k] = A[i];
-        k++;
         i++;
-    }
-    while (j <= high)
-    {
-        B[k] = A[j];
         k++;
-        j++;
     }
-    for (int i = low; i <= high; i++)
+    while (j < high)
     {
-        A[i] = B[i];
+
+        B[k] = A[j];
+        j++;
+        k++;
     }
 }
 
 void mergeSort(int *A, int low, int high)
 {
-    int mid;
     if (low < high)
     {
-        mid = (low + high) / 2;
+        int mid = (low + high) / 2;
         mergeSort(A, low, mid);
         mergeSort(A, mid + 1, high);
-        merge(A, mid, low, high);
+        merge(A, low, mid, high);
     }
 }
 
@@ -67,31 +62,25 @@ int main()
 {
 
     int n;
-    printf("Enter how many random numbers: ");
+    printf("Enter n: ");
     scanf("%d", &n);
 
     int A[n];
+    // printf("enter array elements");
+    // for (int i = 0; i < n; i++)
+    // {
+    //     scanf("%d",&A[i]); // create random int and store in randomAay
+    // }
     for (int i = 0; i < n; i++)
     {
         A[i] = rand() % 100 + 1; // create random int and store in randomAay
     }
 
 
-    clock_t s, e;
+    printArray(A, n);
 
-
-
-    s = clock();
-    // function call
     mergeSort(A, 0, n - 1);
-
-    e = clock();
-
-
-    double t = (double)(e - s) / CLOCKS_PER_SEC;
-
-    printf(" %f\n", t);
+    printArray(A, n);
 
     return 0;
 }
-
