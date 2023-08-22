@@ -69,7 +69,7 @@ int main()
     {
         A[i] = rand() % 100 + 1; // create random int and store in randomAay
     }
-    printArray(A, n);
+    // printArray(A, n);
 
     int size = sizeof(A) / sizeof(int);
     int element;
