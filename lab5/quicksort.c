@@ -11,7 +11,7 @@ void printArray(int *A, int n)
     printf("\n");
 }
 
-int partition(int A[], int low, int high)
+int partition(int *A, int low, int high)
 {
     int pivot = A[low];
     int i = low + 1;
