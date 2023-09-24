@@ -82,7 +82,7 @@ int main()
         case 2:
             start = clock();
             // function call
-            random_array(arr, n);
+            // random_array(arr, n);
             selectionSort(arr, n);
             end = clock();
             printf(" %f\n", t);
