@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 
 void printArray(int *A, int n)
 {
@@ -11,13 +9,14 @@ void printArray(int *A, int n)
     printf("\n");
 }
 
-void merge(int *A, int mid, int low, int high)
+void merge(int A[], int mid, int low, int high)
 {
-    int i, j, k;
-    i = j = low;
+    int i, j, k, B[100];
+    i = low;
     j = mid + 1;
-    int B[100000];
-    while (i < mid && j < high)
+    k = low;
+
+    while (i <= mid && j <= high)
     {
         if (A[i] < A[j])
         {
@@ -32,55 +31,42 @@ void merge(int *A, int mid, int low, int high)
             k++;
         }
     }
-    while (i < mid)
+    while (i <= mid)
     {
         B[k] = A[i];
+        k++;
         i++;
-        k++;
     }
-    while (j < high)
+    while (j <= high)
     {
-
         B[k] = A[j];
-        j++;
         k++;
+        j++;
     }
+    for (int i = low; i <= high; i++)
+    {
+        A[i] = B[i];
+    }
+    
 }
 
-void mergeSort(int *A, int low, int high)
-{
-    if (low < high)
-    {
-        int mid = (low + high) / 2;
+void mergeSort(int A[], int low, int high){
+    int mid; 
+    if(low<high){
+        mid = (low + high) /2;
         mergeSort(A, low, mid);
-        mergeSort(A, mid + 1, high);
-        merge(A, low, mid, high);
+        mergeSort(A, mid+1, high);
+        merge(A, mid, low, high);
     }
 }
 
 int main()
 {
-
-    int n;
-    printf("Enter n: ");
-    scanf("%d", &n);
-
-    int A[n];
-    // printf("enter array elements");
-    // for (int i = 0; i < n; i++)
-    // {
-    //     scanf("%d",&A[i]); // create random int and store in randomAay
-    // }
-    for (int i = 0; i < n; i++)
-    {
-        A[i] = rand() % 100 + 1; // create random int and store in randomAay
-    }
-
-
+    // int A[] = {9, 14, 4, 8, 7, 5, 6};
+    int A[] = {9, 1, 4, 14, 4, 15, 6};
+    int n = 7;
     printArray(A, n);
-
-    mergeSort(A, 0, n - 1);
+    mergeSort(A, 0, 6);
     printArray(A, n);
-
     return 0;
 }
